@@ -47,6 +47,23 @@
           transform: translate3d(100px, 100px, 0);
         }
       }
+
+      .logo {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 50px; /* Adjust the size of your logo */
+        height: auto;
+        display: block;
+      }
+
+      header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1rem;
+      }
     </style>
   </head>
   <body class="antialiased __variable_9c85b7 __variable_9940b2">
@@ -54,8 +71,10 @@
     <div class="background" id="background"></div>
 
     <main class="flex flex-col min-h-screen">
-      <header class="flex items-center justify-between px-4 py-3 relative">
-        <div class="absolute left-4"></div>
+      <header class="flex items-center justify-center px-4 py-3 relative">
+        <!-- Logo Image -->
+        <img src="gn.jpg" alt="Logo" class="logo">
+
         <div class="mx-auto">
           <a href="/">
             <span class="text-white text-2xl transition-all duration-300 hover:scale-105">uwucafe</span>
