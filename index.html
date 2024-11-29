@@ -125,23 +125,31 @@
     <next-route-announcer style="position: absolute;"></next-route-announcer>
 
     <script>
-      // Script to create moving dots
+      // Script to create floating images
       document.addEventListener('DOMContentLoaded', () => {
         const background = document.getElementById('background');
-        
+
         for (let i = 0; i < 100; i++) {
-          const dot = document.createElement('div');
-          dot.classList.add('dot');
-          const size = Math.random() * 3 + 1; // Random size between 1 and 4px
-          dot.style.width = `${size}px`;
-          dot.style.height = `${size}px`;
-          dot.style.top = `${Math.random() * window.innerHeight}px`;
-          dot.style.left = `${Math.random() * window.innerWidth}px`;
+          const img = document.createElement('img');
+          img.src = 'bun.png'; // Set the source to your image file
+          img.style.position = 'absolute';
+          img.style.opacity = 0.7;
+          img.style.animation = 'moveDots 10s linear infinite';
+          
+          // Set a random size for the image
+          const size = Math.random() * 20 + 5; // Random size between 10px and 40px
+          img.style.width = `${size}px`;
+          img.style.height = 'auto'; // Maintain aspect ratio
+          
+          // Position the image randomly within the window
+          img.style.top = `${Math.random() * window.innerHeight}px`;
+          img.style.left = `${Math.random() * window.innerWidth}px`;
 
           // Add animation delay to create a more natural movement effect
-          dot.style.animationDelay = `${Math.random() * 5}s`;
-          
-          background.appendChild(dot);
+          img.style.animationDelay = `${Math.random() * 5}s`;
+
+          // Append the image to the background
+          background.appendChild(img);
         }
       });
     </script>
