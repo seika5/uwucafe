@@ -13,13 +13,49 @@
     <meta property="og:image:alt" content="landing preview">
     <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="16x16">
     <meta name="next-size-adjust">
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      .dot {
+        position: absolute;
+        border-radius: 50%;
+        background-color: white;
+        opacity: 0.7;
+        animation: moveDots 10s linear infinite;
+      }
+
+      @keyframes moveDots {
+        from {
+          transform: translate3d(0, 0, 0);
+        }
+        to {
+          transform: translate3d(100px, 100px, 0);
+        }
+      }
+    </style>
   </head>
   <body class="antialiased __variable_9c85b7 __variable_9940b2">
-    <canvas id="starfield" style="padding:0;margin:0;position:fixed;top:0;right:0;bottom:0;left:0;z-index:10;opacity:1;pointer-events:none;mix-blend-mode:screen" width="956" height="659"></canvas>
+    <!-- Parallax background -->
+    <div class="background" id="background"></div>
+
     <main class="flex flex-col min-h-screen">
       <header class="flex items-center justify-between px-4 py-3 relative">
-        <div class="absolute left-4">
-        </div>
+        <div class="absolute left-4"></div>
         <div class="mx-auto">
           <a href="/">
             <span class="text-white text-2xl transition-all duration-300 hover:scale-105">uwucafe</span>
@@ -27,7 +63,7 @@
         </div>
         <button type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:R239uba:" data-state="closed"></button>
       </header>
-      <div class="flex-grow flex flex-col items-center justify-center bg-background px-6 py-12 sm:px-8 lg:px-10">
+      <div class="flex-grow flex flex-col items-center justify-center px-6 py-12 sm:px-8 lg:px-10">
         <div>
           <p class="mt-4 text-center text-muted-foreground">Brain Damage as a Service.</p>
         </div>
@@ -42,8 +78,8 @@
       <footer class="bg-black bg-opacity-75 py-10 w-full">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div class="flex flex-col items-center md:items-start text-center md:text-left md:w-1/2 px-4">
-            <h2 class="text-lg font-bold">awooga</h2>
-            <p class="text-sm text-muted-foreground">Over 414470 brain cells lost. <br>
+            <h2 class="text-lg font-bold">made my ui as cvrvey as i could</h2>
+            <p class="text-sm text-muted-foreground">Over 414470 brain cells lost making this.<br>
             </p>
           </div>
           <div class="flex flex-col md:flex-row items-center gap-4 px-4" style="opacity: 1; will-change: auto; transform: none;">
@@ -62,12 +98,33 @@
         <div class="container mx-auto flex justify-between items-center">
           <div class="text-white text-sm px-4">uwucafe © 2024</div>
           <div class="flex justify-center gap-6 px-4">
-            <a class="text-muted-foreground hover:text-primary-foreground hover:scale-110 transition-transform">
-            </a>
+            <a class="text-muted-foreground hover:text-primary-foreground hover:scale-110 transition-transform"></a>
           </div>
         </div>
       </footer>
     </main>
     <next-route-announcer style="position: absolute;"></next-route-announcer>
+
+    <script>
+      // Script to create moving dots
+      document.addEventListener('DOMContentLoaded', () => {
+        const background = document.getElementById('background');
+        
+        for (let i = 0; i < 100; i++) {
+          const dot = document.createElement('div');
+          dot.classList.add('dot');
+          const size = Math.random() * 3 + 1; // Random size between 1 and 4px
+          dot.style.width = `${size}px`;
+          dot.style.height = `${size}px`;
+          dot.style.top = `${Math.random() * window.innerHeight}px`;
+          dot.style.left = `${Math.random() * window.innerWidth}px`;
+
+          // Add animation delay to create a more natural movement effect
+          dot.style.animationDelay = `${Math.random() * 5}s`;
+          
+          background.appendChild(dot);
+        }
+      });
+    </script>
   </body>
 </html>
