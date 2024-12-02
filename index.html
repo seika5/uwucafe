@@ -137,7 +137,7 @@
           img.style.animation = 'moveDots 10s linear infinite';
           
           // Set a random size for the image
-          const size = Math.random() * 30 + 20; // Random size between 10px and 40px
+          const size = Math.random() * 50 + 15; // Random size between 10px and 40px
           img.style.width = `${size}px`;
           img.style.height = 'auto'; // Maintain aspect ratio
           
@@ -167,7 +167,7 @@
           if (document.visibilityState === 'visible') {
               createBlossom(mouseX, mouseY);
           }
-          setTimeout(spawnBlossoms, 100); // Spawn every 100ms
+          setTimeout(spawnBlossoms, 50); // Spawn every 100ms
       }
 
       function createBlossom(x, y) {
