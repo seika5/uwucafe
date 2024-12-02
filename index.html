@@ -152,6 +152,77 @@
           background.appendChild(img);
         }
       });
+
+      // Track mouse position
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight + 100;
+
+      document.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX - 10;
+          mouseY = e.clientY - 10;
+      });
+
+      // Continuously create blossoms
+      function spawnBlossoms() {
+          if (document.visibilityState === 'visible') {
+              createBlossom(mouseX, mouseY);
+          }
+          setTimeout(spawnBlossoms, 100); // Spawn every 100ms
+      }
+
+      function createBlossom(x, y) {
+          const blossom = document.createElement('img');
+          blossom.src = 'blossom.png';
+          blossom.style.position = 'fixed';
+          blossom.style.pointerEvents = 'none';
+          blossom.style.width = '20px';
+          blossom.style.height = '20px';
+          blossom.style.left = x + 'px';
+          blossom.style.top = y + 'px';
+          blossom.style.zIndex = '1000';
+          document.body.appendChild(blossom);
+
+          // Random initial velocities
+          const vx = (Math.random() - 0.5) * 4; // Random x velocity
+          const vy = Math.random() * -2 - 2; // Initial upward velocity
+          let rotation = Math.random() * 360; // Initial rotation
+          const rotationSpeed = (Math.random() - 0.5) * 10; // Rotation speed
+          
+          let currentX = x;
+          let currentY = y;
+          let time = 0;
+          
+          function animate() {
+              time += 0.016; // Approximately 60 FPS
+              
+              // Update position with physics
+              currentX += vx;
+              currentY += vy + (9.81 * time); // Add gravity
+              rotation += rotationSpeed;
+              
+              blossom.style.transform = `translate(${currentX - x}px, ${currentY - y}px) rotate(${rotation}deg)`;
+              
+              // Remove blossom if it's off screen
+              if (currentY > window.innerHeight + 50 || 
+                  currentX < -50 || 
+                  currentX > window.innerWidth + 50) {
+                  blossom.remove();
+                  return;
+              }
+              
+              requestAnimationFrame(animate);
+          }
+          
+          animate();
+          
+          // Remove blossom after 5 seconds to prevent memory issues
+          setTimeout(() => blossom.remove(), 5000);
+      }
+
+      // Start spawning when the page loads
+      document.addEventListener('DOMContentLoaded', () => {
+          spawnBlossoms();
+      });
     </script>
   </body>
 </html>
